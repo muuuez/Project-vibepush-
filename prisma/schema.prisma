@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tempahan {
+  id            String   @id
+  nama_pemohon  String
+  item_tempahan String
+  tarikh        String
+  slot_masa     String
+  status        String   @default("Menunggu")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([tarikh])
+  @@index([status])
+  @@index([item_tempahan])
+}
